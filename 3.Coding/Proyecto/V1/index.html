@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIS ACCIONES</title>
+    
+</head>
+
+<body style="background-color: antiquewhite;">
+    <h1>MIS ACCIONES</h1>
+    <h2>Registro de Acciones</h2>
+
+    <table id="accionesTable">
+        <thead>
+            <tr>
+                <th>Nombre de la Acción</th>
+                <th>Fecha de Compra</th>
+                <th>Precio de Compra por Acción</th>
+                <th>Cantidad de Acciones</th>
+                <th>Costo Total de Compra</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" value="AAPL"></td>
+                <td><input type="date" value="2023-01-10" class="fecha"></td>
+                <td><input type="text" value="150" id="precio0"></td>
+                <td><input type="text" value="10" id="cantidad0"></td>
+                <td><span id="total0">1500.00</span></td>
+            </tr>
+            <tr>
+                <td><input type="text" value="MSFT"></td>
+                <td><input type="date" value="2023-02-15" class="fecha"></td>
+                <td><input type="text" value="250" id="precio1"></td>
+                <td><input type="text" value="5" id="cantidad1"></td>
+                <td><span id="total1">1250.00</span></td>
+            </tr>
+            <tr>
+                <td><input type="text" value="TSLA"></td>
+                <td><input type="date" value="2023-03-20" class="fecha"></td>
+                <td><input type="text" value="700" id="precio2"></td>
+                <td><input type="text" value="2" id="cantidad2"></td>
+                <td><span id="total2">1400.00</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button onclick="agregarFila()">Añadir</button>
+    <button onclick="eliminarUltimaFila()">Eliminar Última Fila</button>
+
+    <script>
+        function agregarFila() {
+            var table = document.getElementById("accionesTable").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.rows.length);
+            var count = table.rows.length - 1; // Obtener el número actual de filas
+            var cells = [];
+
+            for (var i = 0; i < 5; i++) {
+                cells[i] = newRow.insertCell(i);
+
+                switch (i) {
+                    case 1:
+                        cells[i].innerHTML = '<input type="date" class="fecha">';
+                        break;
+                    case 2:
+                        cells[i].innerHTML = '<input type="text" value="" id="precio' + count + '" oninput="validarNegativos(this)">';
+                        break;
+                    case 3:
+                        cells[i].innerHTML = '<input type="text" value="" id="cantidad' + count + '" oninput="validarNegativos(this)">';
+                        break;
+                    case 4:
+                        cells[i].innerHTML = '<span id="total' + count + '"></span>';
+                        break;
+                    default:
+                        cells[i].innerHTML = '<input type="text" value="">';
+                }
+            }
+
+            // Asociar la función al evento de cambio en precio o cantidad
+            document.getElementById("precio" + count).addEventListener("input", function() {
+                calcularTotal(count);
+            });
+            document.getElementById("cantidad" + count).addEventListener("input", function() {
+                calcularTotal(count);
+            });
+        }
+
+        function eliminarUltimaFila() {
+            var table = document.getElementById("accionesTable").getElementsByTagName('tbody')[0];
+            var rowCount = table.rows.length;
+
+            // Asegurarse de que haya al menos una fila para eliminar
+            if (rowCount > 0) {
+                table.deleteRow(rowCount - 1);
+            }
+        }
+
+        // Función para calcular el total y actualizar el span
+        function calcularTotal(count) {
+            var precio = parseFloat(document.getElementById("precio" + count).value) || 0;
+            var cantidad = parseFloat(document.getElementById("cantidad" + count).value) || 0;
+
+            // Validar que los valores no sean negativos
+            precio = Math.max(0, precio);
+            cantidad = Math.max(0, cantidad);
+
+            var total = precio * cantidad;
+
+            // Actualizar el contenido del span
+            document.getElementById("total" + count).textContent = total.toFixed(2);
+        }
+
+        // Función para validar que el valor no sea negativo
+        function validarNegativos(input) {
+            input.value = Math.max(0, parseFloat(input.value)) || 0;
+        }
+    </script>
+</body>
+
+</html>

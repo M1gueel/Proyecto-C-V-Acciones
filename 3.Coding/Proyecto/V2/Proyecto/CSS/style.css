@@ -1,0 +1,53 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f5ed; /* Color de fondo beige claro */
+    color: #333; /* Color de texto principal */
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #c94c4c; /* Rojo oscuro para los títulos principales */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #dcdcdc; /* Borde gris claro para las celdas de la tabla */
+    padding: 8px;
+    text-align: left;
+}
+
+thead {
+    background-color: #e0b389; /* Color de fondo naranja claro para el encabezado de la tabla */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f5f5f5; /* Color de fondo gris claro para filas pares */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* Color de fondo blanco para filas impares */
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #c94c4c; /* Color de fondo rojo oscuro para los botones */
+    color: #ffffff; /* Color del texto blanco para los botones */
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a63c3c; /* Color de fondo rojo más oscuro al pasar el ratón */
+}
